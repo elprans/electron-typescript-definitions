@@ -1,0 +1,25 @@
+language: node_js
+cache:
+  directories:
+    - ~/.npm
+notifications:
+  email: false
+node_js:
+  - '10'
+branches:
+  only:
+    - master
+    - /^v\d+(\.\d+)*-gentoo$/
+before_deploy:
+  - ./npm-pack.sh
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: "BXIKYydmRAs6a018YpUsapiuSVh22KS1XhWcY5ZCPvBzpR2++ymrvDr4+NJdL473opX1dJS/Kz7BynGaT3VVMwncJhF0J/1d8r3hMJ1AfFj5hDksRTGOIuQ98LVJ9tqrO1akPV0IgcjvKYZwNhsWmjRlIgVPojIGiFW/YPihONdYxdSjrvbEisdG0YLwpvcAhkK+qaOO1zIgvoQqTOhibV0YP9J5qDLI93ycVocZjqihWTw9fNZ6WQ9OJSLjyY2xymtkohKs8gCumljnQTC9vmvJWMOz2mFm4nW/Xq0/NbioHvOY+y+wwqdfTF8PQ/kS3h9xWM+vyHeuO3Ioz1ewuqDuQqhvhzBqQdULHF6PO2Cp2u4nsoxbKBtMxcM8CaMXL43LsF5hR4fwTuk+EVi5qAtpki1I3q59pLH7T5RaFhYHea3Slps4nt31zVP4E7eSkOvGRAHZAxUVSkgX+03r9+c/Nip32Np9V4oGZOFDOLpdnpL1F/CMhPo2N6UEIuluBk3yxWBHwaRaNWpVhaCf19QK+Ze0/AfC8MbsfPiDKd7oQEQoz+vtJ51C9DD/Tcoid1j0FpX3ZLOlpdPuknHgNRWeJyTlNH1irNugC7pf98QA3bstBwU22yZNdzwh14/6bsLhqqE5HGdVoEi0vFCxItqOorNJosdbID1lThDS9Ac="
+  file:
+    - electron-typescript-definitions-build.tar.gz
+  on:
+    tags: true
+    repo: elprans/electron-typescript-definitions
+    node: '10'
